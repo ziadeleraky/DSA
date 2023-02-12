@@ -23,29 +23,3 @@ function mergeSortedArrays(arr1, arr2) {
 
 // test
 console.log(mergeSortedArrays(array1, array2));
-
-// ----------------------------------------------
-const array3 = [1, 32, 65, 898];
-const array4 = [6, 54, 98, 637];
-function mergeArrays(arr1, arr2) {
-  const merged = [];
-  let arrItem1 = arr1[0];
-  let arrItem2 = arr2[0];
-  let i = 1;
-  let j = 1;
-  while (arrItem1 || arrItem2) {
-    if (arrItem1 < arrItem2) {
-      merged.push(arrItem1);
-      arrItem1 = arr1[i];
-      i++;
-    } else {
-      merged.push(arrItem2);
-      arrItem2 = arr2[j];
-      j++;
-    }
-  }
-
-  return merged;
-}
-
-console.log(mergeArrays(array3, array4));
