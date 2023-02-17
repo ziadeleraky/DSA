@@ -7,6 +7,8 @@ class LinkedList {
     this.tail = this.head;
     this.length = 1;
   }
+
+  // append a node to the end of the linkedlist
   append(value) {
     const node = {
       value,
@@ -16,20 +18,106 @@ class LinkedList {
     this.tail = node;
     this.length++;
   }
+  // time complexity: O(1) of appending a node to the end of the linkedlist
+  // space complexity: O(1) of appending a node to the end of the linkedlist
 
+  // prepend a node to the beginning of the linkedlist
   prepend(value) {
     const node = {
       value,
-      next: this.head,
-    }
+      next: null,
+    };
+    node.next = this.head;
     this.head = node;
     this.length++;
   }
+  // time complexity: O(1) of prepending a node to the beginning of the linkedlist
+  // space complexity: O(1) of prepending a node to the beginning of the linkedlist
+
+  // print the linkedlist as an array
+  print() {
+    const array = [];
+    // Start with first item in the linkedlist
+    let currentNode = this.head;
+    while (currentNode !== null) {
+      array.push(currentNode.value);
+      currentNode = currentNode.next;
+    }
+    return array;
+  }
+  // time complexity: O(n) of printing the linkedlist as an array
+  // space complexity: O(n) of printing the linkedlist as an array
+
+  // insert a node at a specific index
+  insert(index, value) {
+    // if index is greater than the length of the linkedlist, append the value to the end
+    if (index >= this.length) {
+      this.append(value);
+      return this.print();
+      // if index is 0, prepend the value to the beginning
+    } else if (index === 0) {
+      this.prepend(value);
+      return this.print();
+    }
+
+    // create a new node
+    const node = {
+      value,
+      next: null,
+    };
+
+    // traverse to the index before the index we want to insert at
+    const prevIndex = this.traverseToIndex(index - 1);
+    // store the next node in a variable so we can set the next of the new node to it
+    const pointer = prevIndex.next;
+    // set the next of the previous node to the new node
+    prevIndex.next = node;
+    // set the next of the new node to the pointer
+    node.next = pointer;
+    this.length++;
+    return this.print();
+  }
+  // time complexity: O(n) of inserting a node at a specific index
+  // space complexity: O(1) of inserting a node at a specific index
+
+  // traverse to a specific index
+  traverseToIndex(index) {
+    let counter = 0;
+    let currentNode = this.head;
+    while (counter !== index) {
+      currentNode = currentNode.next;
+      counter++;
+    }
+    return currentNode;
+  }
+
+  // remove a node at a specific index
+  remove(index) {
+    if (index == 0) {
+      this.head = this.head.next;
+      this.length--;
+      return this.print();
+    }
+    const prevIndex = this.traverseToIndex(index - 1);
+    const pointer = prevIndex.next;
+    prevIndex.next = pointer.next;
+    this.length--;
+    return this.print();
+  }
+  // time complexity: O(n) of removing a node at a specific index
+  // space complexity: O(1) of removing a node at a specific index
 }
 
-const linkedlist = new LinkedList(10);
-linkedlist.append(5);
-linkedlist.prepend(1);
-// linkedlist.append(16);
-// linkedlist.append(20);
-console.log(linkedlist);
+// test cases
+const linkedlist = new LinkedList(5);
+linkedlist.append(15);
+linkedlist.append(20);
+linkedlist.insert(1, 10);
+linkedlist.insert(4, 25);
+linkedlist.insert(0, 0);
+linkedlist.insert(0, -5);
+linkedlist.append(35);
+linkedlist.remove(2);
+linkedlist.remove(0);
+linkedlist.insert(5, 30);
+console.log(linkedlist.print());
