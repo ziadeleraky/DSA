@@ -106,6 +106,37 @@ class LinkedList {
   }
   // time complexity: O(n) of removing a node at a specific index
   // space complexity: O(1) of removing a node at a specific index
+
+  // reverse the linkedlist
+  reverse() {
+    // if the linkedlist is empty, return null
+    if (!this.head) {
+      return null;
+    }
+    // if the linkedlist only has one node, return the linkedlist
+    if (!this.head.next) {
+      return this.head;
+    }
+    // create three variables to keep track of the previous, current, and next nodes
+    // set the previous node to null
+    let prev = null;
+    // set the current node to the head
+    let current = this.head;
+    // while the current node is not null
+    while (current) {
+      // keep track of the next node
+      let next = current.next;
+      // set the next of the current node to the previous node (which is null at first)
+      current.next = prev;
+      // set the previous node to the current node (which was the next node before we set the next of the current node to the previous node)
+      prev = current;
+      // set the current node to the next node (which was the next node before we set the next of the current node to the previous node)
+      current = next;
+    }
+    // set the tail to the head
+    this.head = prev;
+    return this.print();
+  }
 }
 
 // test cases
@@ -120,4 +151,5 @@ linkedlist.append(35);
 linkedlist.remove(2);
 linkedlist.remove(0);
 linkedlist.insert(5, 30);
+linkedlist.reverse();
 console.log(linkedlist.print());
