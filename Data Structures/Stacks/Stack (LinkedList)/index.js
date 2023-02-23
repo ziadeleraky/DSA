@@ -17,6 +17,7 @@ class Stack {
     const node = new Node(value);
     // if stack is empty
     if (this.length === 0) {
+      // set the new node as the top and bottom of the stack
       this.top = node;
       this.bottom = node;
       // if stack is not empty
@@ -41,7 +42,11 @@ class Stack {
     }
     // if stack has only one node
     if (this.top === this.bottom) {
+      // set the top and bottom to null
+      this.top = null;
       this.bottom = null;
+      this.length--;
+      return this;
     }
     // store the current top in a variable
     const poppedItem = this.top;
@@ -58,6 +63,11 @@ class Stack {
     return this.top;
   }
 
+  // check if the stack is empty
+  isEmpty() {
+    return console.log(this.length === 0);
+  }
+
   // print the stack in an array
   print() {
     const array = [];
@@ -72,11 +82,14 @@ class Stack {
   // space complexity: O(n) as we are creating a new array to store the stack
 }
 
+// test cases
 const stack = new Stack();
 stack.push(1);
+stack.push(1);
+stack.pop();
 stack.push(10);
 stack.push(100);
 stack.push(1000);
 stack.pop();
-console.log(stack.peek());
+console.log('-- Peak Method --\n', stack.peek());
 stack.print();
