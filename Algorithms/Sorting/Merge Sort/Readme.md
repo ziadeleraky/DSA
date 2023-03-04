@@ -1,4 +1,4 @@
-## Megre Sort Explanation
+## Merge Sort Explanation
 
 <div align="center">
 
